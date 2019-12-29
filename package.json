@@ -1,0 +1,17 @@
+{
+  "name": "food_list_app",
+  "version": "1.0.0",
+  "description": "Food recipe for making something delicious",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.41.5"
+  },
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
+}
