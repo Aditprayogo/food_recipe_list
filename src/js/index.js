@@ -16,12 +16,16 @@ const controllerSearch = async () => {
         state.search = new Search(query);
 
         //3) prepare UI for result
+        searchView.clearInput();
+        searchView.clearResult();
 
         //4.) search for recipe
         await state.search.getResult();
 
         //5.) render result on UI
         searchView.renderResults(state.search.result);
+
+
     }
 
 
