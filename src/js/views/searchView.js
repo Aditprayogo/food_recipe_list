@@ -13,6 +13,7 @@ export const clearResult = () => {
 
     elements.searchResultList.innerHTML = '';
 
+
 }
 
 const limitRecipeTitle = (title, limit = 17) => {
