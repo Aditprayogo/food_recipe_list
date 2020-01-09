@@ -19,21 +19,9 @@ export const clearResult = () => {
 
 const limitRecipeTitle = (title, limit = 17) => {
 
-    // const newTitle = [];
+
 
     if (title.length > limit) {
-
-        // // //1.)  di split dulu stringnya
-        // title.split(' ').reduce((acc, cur) => {
-
-        //     if (acc + cur.length <= limit) {
-
-        //         newTitle.push(cur)
-
-        //     }
-        //     return acc + cur.length;
-
-        // }, 0);
 
         title = title.substring(0, 17);
 
