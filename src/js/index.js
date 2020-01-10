@@ -1,4 +1,5 @@
 import Search from './models/Search';
+import Recipe from './models/Recipe';
 
 import * as searchView from './views/searchView';
 
@@ -7,6 +8,7 @@ import { elements, renderLoader, clearLoader } from './views/base';
 // global state
 const state = {};
 
+// Search Controller
 const controllerSearch = async () => {
 
     // 1 .) get query from the view
@@ -62,3 +64,30 @@ elements.searchResAndPages.addEventListener('click', (e) => {
 
 })
 
+// Recipe Controller
+const controlRecipe = async () => {
+    // get id from url
+    const id = window.location.hash.replace('#', '');
+
+    console.log(id);
+
+    if (id) {
+        // preparing UI for changes
+
+        // create new recipe object
+        state.recipe = new Recipe(id);
+        // get recipe object
+        await state.recipe.getRecipe();
+        // callculate time
+        state.recipe.calcTime();
+        // callculate service
+        state.recipe.calcServings();
+
+        // render recipe
+        console.log(state.recipe)
+
+    }
+}
+
+
+window.addEventListener('hashchange', controlRecipe);
