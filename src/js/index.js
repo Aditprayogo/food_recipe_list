@@ -40,19 +40,13 @@ const controllerSearch = async () => {
         }
 
     }
-
-
-
-
 }
 
 elements.searchForm.addEventListener('submit', e => {
 
     e.preventDefault();
-
     controllerSearch();
-
-})
+});
 
 
 elements.searchResAndPages.addEventListener('click', (e) => {
@@ -66,10 +60,9 @@ elements.searchResAndPages.addEventListener('click', (e) => {
         searchView.clearResult();
         searchView.renderResults(state.search.result, goToPage);
 
-
     }
 
-})
+});
 
 // Recipe Controller
 const controlRecipe = async () => {
@@ -82,6 +75,13 @@ const controlRecipe = async () => {
         // preparing UI for changes
         recipeView.clearRecipe()
         renderLoader(elements.recipe);
+
+        // highligit the selected item
+        if (state.search) {
+
+            searchView.highlightSelected(id);
+
+        }
 
         // create new recipe object
         state.recipe = new Recipe(id);
