@@ -34,8 +34,6 @@ export const highlightSelected = id => {
 
 const limitRecipeTitle = (title, limit = 17) => {
 
-
-
     if (title.length > limit) {
 
         title = title.substring(0, 17);
