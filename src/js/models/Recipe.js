@@ -103,8 +103,7 @@ export default class Search {
                     ingredient
                 }
             }
-
-
+            // return object ingredient
             return objIng;
         })
         this.ingredients = newIngredients;
