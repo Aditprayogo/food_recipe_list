@@ -42,34 +42,31 @@ export default class Search {
 
     parseIngredients() {
 
-        const unitLongs = ['adit', 'Adit', ' Acip'];
-        const unitsShort = ['add', 'adt', 'acp'];
+        const unitsLong = ['tablespoons', 'tablespoon', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups', 'pounds'];
+        const unitsShort = ['tbsp', 'tbsp', 'oz', 'oz', 'tsp', 'tsp', 'cup', 'pound'];
+        const units = [...unitsShort, 'kg', 'g'];
 
         const newIngredients = this.ingredients.map(el => {
             // 1.) uniform the units
             let ingredient = el.toLowerCase();
 
-            unitLongs.forEach((unit, i) => {
+            unitsLong.forEach((unit, i) => {
                 ingredient = ingredient.replace(unit, unitsShort[i]);
             })
 
             // 2.) remove pranteses
-            ingredient = ingredient.replace(/ *\([^)]*\) */g, " ");
-
+            ingredient = ingredient.replace(/ *\([^)]*\) */g, ' ');
             // 3.) count units and ingredient
             const arrIng = ingredient.split(' ');
-
             // cara nyari index yang tidak kita ketahui panjang arraynya
-            const unitIndex = arrIng.findIndex(el2 => unitsShort.includes(el2));
+            const unitIndex = arrIng.findIndex(el2 => units.includes(el2));
 
             let objIng;
-
             if (unitIndex > -1) {
                 // unitnya ada di pertama
                 // ex 4 1/2 cups, arrCount is (4, 1/2) ---> eval('4, 1/2') == 4,5
                 // ex 4 cups arrCount is 1
                 const arrCount = arrIng.slice(0, unitIndex);
-
                 let count;
 
                 if (arrCount.length === 1) {

@@ -80,6 +80,7 @@ const controlRecipe = async () => {
 
     if (id) {
         // preparing UI for changes
+        recipeView.clearRecipe()
         renderLoader(elements.recipe);
 
         // create new recipe object
@@ -94,9 +95,10 @@ const controlRecipe = async () => {
             state.recipe.calcTime();
             // callculate service
             state.recipe.calcServings();
-            recipeView.clearRecipe();
+
             // render recipe
             clearLoader()
+
             recipeView.renderRecipe(state.recipe);
 
 
