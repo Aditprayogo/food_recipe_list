@@ -102,7 +102,10 @@ const controlRecipe = async () => {
             // render recipe
             clearLoader()
 
-            recipeView.renderRecipe(state.recipe);
+            recipeView.renderRecipe(
+                state.recipe,
+                state.likes.isLiked(id)
+            );
 
 
         } catch (error) {
@@ -158,7 +161,8 @@ elements.shopping.addEventListener('click', e => {
 });
 
 
-
+state.likes = new Likes();
+likesView.toggleLikeMenu(state.likes.getNumLikes())
 // Like Controller===============================
 const controlLike = () => {
 
@@ -178,7 +182,7 @@ const controlLike = () => {
         // toggle the like button
         likesView.toggleLikeBtn(true);
         // add like to UI list
-
+        likesView.renderLike(newLike);
 
 
     } else {
@@ -190,8 +194,10 @@ const controlLike = () => {
         likesView.toggleLikeBtn(false);
 
         // Remove like to UI list
-
+        likesView.deleteLike(currentId);
     }
+
+    likesView.toggleLikeMenu(state.likes.getNumLikes())
 
 }
 
