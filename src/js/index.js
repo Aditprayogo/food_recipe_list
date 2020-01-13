@@ -5,8 +5,10 @@ import List from './models/List';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import * as listView from './views/listView';
+import * as likesView from './views/likesView';
 
 import { elements, renderLoader, clearLoader } from './views/base';
+import Likes from './models/Likes';
 
 // global state
 const state = {};
@@ -153,7 +155,47 @@ elements.shopping.addEventListener('click', e => {
     }
 
 
-})
+});
+
+
+
+// Like Controller===============================
+const controlLike = () => {
+
+    if (!state.likes) state.likes = new Likes();
+
+    const currentId = state.recipe.id;
+
+    // jika belum di like
+    if (!state.likes.isLiked(currentId)) {
+        // add like to state
+        const newLike = state.likes.addLike(
+            currentId,
+            state.recipe.title,
+            state.recipe.author,
+            state.recipe.img
+        );
+        // toggle the like button
+        likesView.toggleLikeBtn(true);
+        // add like to UI list
+
+
+
+    } else {
+        // jika sudah di like
+
+        // Remove like to state
+        state.likes.deleteLike(currentId);
+        // toggle the like button
+        likesView.toggleLikeBtn(false);
+
+        // Remove like to UI list
+
+    }
+
+}
+
+
 
 // event delegation
 // handling recipe button clicks
@@ -176,7 +218,13 @@ elements.recipe.addEventListener('click', e => {
 
     } else if (e.target.matches('.recipe__btn--add, .recipe__btn--add *')) {
 
+        // add ingredients to shooping list
         controlList();
+
+    } else if (e.target.matches('.recipe__love, .recipe__love *')) {
+
+        // Like controller
+        controlLike();
 
     }
 
