@@ -161,8 +161,7 @@ elements.shopping.addEventListener('click', e => {
 });
 
 
-state.likes = new Likes();
-likesView.toggleLikeMenu(state.likes.getNumLikes())
+
 // Like Controller===============================
 const controlLike = () => {
 
@@ -201,6 +200,23 @@ const controlLike = () => {
 
 }
 
+
+// page load
+// restore like resipe on page load
+window.addEventListener('load', () => {
+
+
+    state.likes = new Likes();
+    // read likes
+    state.likes.readStorage();
+    // toggle button
+    likesView.toggleLikeMenu(state.likes.getNumLikes());
+
+    // render the existing likes
+    // store likes on local storage
+    state.likes.likes.forEach(like => likesView.renderLike(like));
+
+});
 
 
 // event delegation

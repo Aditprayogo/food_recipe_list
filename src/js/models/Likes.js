@@ -10,6 +10,8 @@ export default class Likes {
 
         this.likes.push(like)
 
+        // persist data and local storage
+        this.persistData();
         return like;
     }
 
@@ -19,6 +21,9 @@ export default class Likes {
 
         // start dimana yang ditemukan , lalu ambil satu angka
         this.likes.splice(index, 1);
+
+        // persis data to local storage
+        this.persistData();
     }
 
     isLiked(id) {
@@ -31,4 +36,23 @@ export default class Likes {
 
         return this.likes.length;
     }
+
+    persistData() {
+
+        // convert ke json string
+        localStorage.setItem('likes', JSON.stringify(this.likes));
+    }
+
+    readStorage() {
+
+        const storage = JSON.parse(localStorage.getItem('likes'));
+
+        // restoring likes from local storage
+        if (storage) {
+            this.likes = storage;
+        }
+
+    }
+
+
 }
